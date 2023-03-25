@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Test from './component/test/Test';
 
@@ -6,6 +6,8 @@ function App() {
   return (
     <div className="App">
       <Test></Test>
+      <LoadPost> </LoadPost>
+      <District name='Nahid' phone='01750666272'></District>
       <District name='Nahid' phone='01750666272'></District>
     </div>
   );
@@ -14,10 +16,27 @@ function App() {
 const districtStyle = {
   backgroundColor: 'yellow'
 }
+
+function LoadPost() {
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(data => setUsers(data))
+  }, [])
+  return (
+    <div>
+      <h1>
+        Posts: {users.length}
+      </h1>
+    </div>
+  )
+}
+
 function District(props) {
   const [power, setPower] = useState(1);
   const boostPower = () => {
-      setPower(power+1)
+    setPower(power + 1)
   }
   return (
     <div style={districtStyle}>
