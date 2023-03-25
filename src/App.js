@@ -29,6 +29,17 @@ function LoadPost() {
       <h1>
         Posts: {users.length}
       </h1>
+      {
+        users.map(user =><Post name={user.name}></Post>)
+      }
+    </div>
+  )
+}
+
+function Post(props){
+  return(
+    <div style={{backgroundColor:'red',padding:'20px',marginBottom:'10px',borderRadius:'20px'}}>
+      <h2>User Name: {props.name}</h2>
     </div>
   )
 }
